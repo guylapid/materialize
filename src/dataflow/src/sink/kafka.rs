@@ -491,6 +491,7 @@ impl KafkaSinkState {
 
     fn create_producer_config(connector: &KafkaSinkConnector) -> ClientConfig {
         let mut config = ClientConfig::new();
+        config.set("message.max.bytes", "100000000");
         config.set("bootstrap.servers", &connector.addrs.to_string());
 
         // Ensure that messages are sinked in order and without duplicates. Note that
